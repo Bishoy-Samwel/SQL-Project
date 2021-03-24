@@ -178,6 +178,26 @@ select matchid, mdate, count(*) from game join goal on matchid = id where (teami
 SELECT mdate, team1, SUM(          case          when teamid=team1 then 1          ELSE 0          END ) AS score1, team2, SUM(          case          when teamid=team2 then 1          ELSE 0          END ) AS score2 FROM game gm LEFT JOIN goal g ON(gm.id=g.matchid) GROUP BY mdate,team1,team2 ORDER BY matchid
 
 --7 More JOIN operations
+SELECT id, title  FROM movie  WHERE yr=1962
+select yr from movie where title = 'Citizen Kane'
+select id, title, yr from movie where title like ('%Star Trek%') order by yr
+select id from actor where name = 'Glenn Close'
+select id from movie where title = 'Casablanca'
+select name  from casting join actor on id = actorid  where movieid = 11768
+select name  from casting join actor on id = actorid  where movieid = (select id from movie where title = 'Alien' )
+select title from movie join casting on movie.id = movieid join actor on actor.id = actorid where actor.name =  'Harrison Ford'
+select title from movie join casting  on movie.id = movieid join actor on actor.id = actorid where actor.name =  'Harrison Ford' and ord <> 1
+select movie.title, actor.name from movie join casting on movie.id=casting.movieid join actor on actor.id= casting.actorid where movie.yr = 1962 and ord = 1
+SELECT yr,COUNT(title) FROM   movie JOIN casting ON movie.id=movieid         JOIN actor   ON actorid=actor.id WHERE name='Rock Hudson' GROUP BY yr HAVING COUNT(title) > 2
+SELECT movie.title, actor.name  FROM   movie JOIN casting ON movie.id=casting.movieid         JOIN actor   ON casting.actorid=actor.id and ord=1  where casting.movieid in ( SELECT movieid FROM casting WHERE actorid = (   SELECT id FROM actor   WHERE name='Julie Andrews'))
+    movie.title
+        actor.name
+    where name='Julie Andrews'
+    Find the id of julie
+    Find her films from casting using her id
+select actor.name  from actor join casting on actor.id = casting.actorid and (select count(ord)  from casting  where ord=1 and actor.id = casting.actorid) >= 15 group by name
+select distinct movie.title, COUNT(actorid) from movie join casting on movie.id = casting.movieid where  movie.yr = 1978 group by title order by COUNT(actorid) desc, title
+select actor.name from actor join casting on actor.id = casting.actorid where movieid in (select movieid from casting where actorid = (select id from actor where name = 'Art Garfunkel')) and actor.name <> 'Art Garfunkel'
 
 --8 Using Null
 
