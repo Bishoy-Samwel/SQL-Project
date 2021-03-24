@@ -34,6 +34,20 @@ SELECT name, capital FROM world where  LEFT(name,1)=  LEFT(capital,1) and name <
 SELECT name    FROM world WHERE name LIKE '%a%' and name LIKE '%i%' and name LIKE '%e%' and name LIKE '%o%' and name LIKE '%u%'   and name NOT LIKE '% %'
 
 --3 SELECT from Nobel
+SELECT yr, subject, winner   FROM nobel  WHERE yr = 1950
+SELECT winner   FROM nobel  WHERE yr = 1962    AND subject = 'Literature'
+SELECT yr, subject   FROM nobel  WHERE  winner = 'Albert Einstein'
+SELECT winner   FROM nobel  WHERE  subject = 'Peace' and yr >= 2000
+SELECT yr, subject, winner   FROM nobel  WHERE  subject = 'Literature' and yr <= 1989 and yr >= 1980
+SELECT * FROM nobel  WHERE    winner IN ('Theodore Roosevelt',                   'Woodrow Wilson',                   'Jimmy Carter', 'Barack Obama')
+SELECT winner FROM nobel  WHERE    winner like ('John%')
+SELECT yr,subject,winner FROM nobel  WHERE    subject= 'Chemistry' and yr=1984 or   subject= 'Physics' and yr=1980
+SELECT yr,subject,winner FROM nobel  WHERE    yr= 1980 and subject not in ('Chemistry', 'Medicine')
+SELECT yr,subject,winner FROM nobel  WHERE    yr< 1910 and yr <> 1910 and subject in ('Medicine') or subject in ('Literature') and yr >= 2004
+SELECT * FROM nobel  WHERE    winner = 'PETER GRÜNBERG'
+SELECT * FROM nobel  WHERE    winner like ( 'EUGENE O%')
+SELECT winner,yr,subject FROM nobel  WHERE    winner like ( 'Sir%')
+SELECT winner, subject   FROM nobel  WHERE yr=1984  ORDER BY subject IN ('Physics','Chemistry'), subject, winner
 
 --4 SELECT within SELECT
 
