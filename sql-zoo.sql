@@ -212,3 +212,12 @@ select teacher.name, case when teacher.dept in(1,2) then 'Sci' else 'Art' end fr
 select teacher.name, case when teacher.dept in(1,2) then 'Sci' when teacher.dept in(4) then 'Art' else 'None' end from teacher
 
 --9 Self join
+select count(id) from stops
+select id from stops where stops.name =  'Craiglockhart'
+select id, name from stops join route on stops.id = route.stop where num = '4' and company = 'LRT'
+SELECT company, num, COUNT(*) FROM route WHERE stop=149 OR stop=53 GROUP BY company, num HAVING COUNT(*) = 2
+SELECT a.company, a.num, a.stop, b.stop FROM route a JOIN route b ON   (a.company=b.company AND a.num=b.num) WHERE a.stop=53 and b.stop=149
+SELECT a.company, a.num, stopa.name, stopb.name FROM route a JOIN route b ON   (a.company=b.company AND a.num=b.num)   JOIN stops stopa ON (a.stop=stopa.id)   JOIN stops stopb ON (b.stop=stopb.id) WHERE stopa.name ='Craiglockhart' and stopb.name = 'London Road'
+SELECT DISTINCT a.company, a.num FROM route a JOIN route b ON a.num = b.num WHERE a.stop = 115 AND b.stop = 137
+select routea.company, routea.num from route routea join route routeb on (routea.num = routeb.num) join stops stopa on(routea.stop = stopa.id) join stops stopb on (routeb.stop = stopb.id) where  stopa.name = 'Craiglockhart' AND stopb.name = 'Tollcross'
+SELECT DISTINCT sb.name, rb.company, rb.num from route ra join route rb on (ra.num = rb.num AND ra.company = rb.company) join stops sa on(ra.stop = sa.id) join stops sb on (rb.stop = sb.id)  WHERE sa.name = 'Craiglockhart'
