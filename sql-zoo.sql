@@ -200,5 +200,15 @@ select distinct movie.title, COUNT(actorid) from movie join casting on movie.id 
 select actor.name from actor join casting on actor.id = casting.actorid where movieid in (select movieid from casting where actorid = (select id from actor where name = 'Art Garfunkel')) and actor.name <> 'Art Garfunkel'
 
 --8 Using Null
+select name from teacher where dept is null
+SELECT teacher.name, dept.name  FROM teacher INNER JOIN dept            ON (teacher.dept=dept.id)
+select teacher.name as teacher, dept.name as department from teacher left join dept on teacher.dept=dept.id
+select teacher.name as teacher, dept.name as department from teacher right join dept on teacher.dept=dept.id
+select teacher.name, COALESCE(teacher.mobile,'07986 444 2266') from teacher
+select teacher.name, COALESCE(dept.name,'None') from teacher left join dept on teacher.dept = dept.id
+select count(teacher.name), count(teacher.mobile) from teacher
+select dept.name, COALESCE(count (teacher.name), 0) as teachers from teacher right join dept on teacher.dept = dept.id group by dept.name
+select teacher.name, case when teacher.dept in(1,2) then 'Sci' else 'Art' end from teacher
+select teacher.name, case when teacher.dept in(1,2) then 'Sci' when teacher.dept in(4) then 'Art' else 'None' end from teacher
 
 --9 Self join
