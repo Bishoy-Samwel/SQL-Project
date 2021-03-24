@@ -153,6 +153,14 @@ select continent, name from world where name in (select min (name) from world  g
 Select  x.continent, x.name From world x Where x.name <= ALL (select y.name from world y where x.continent=y.continent) ORDER BY name
 
 --5 SUM and COUNT
+SELECT SUM(population) FROM world
+select distinct continent from world
+select sum(gdp) from world where continent = 'Africa'
+select count(name) from world where area>=1000000
+select sum(population) from world where name in ('Estonia', 'Latvia', 'Lithuania')
+select continent, count(name) from world group by continent
+SELECT continent, COUNT(name) FROM world WHERE population >= 10000000 GROUP BY continent;
+select continent from world group by continent having sum(population)>=100000000
 
 --6 JOIN
 
