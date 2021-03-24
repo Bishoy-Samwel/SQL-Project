@@ -163,6 +163,19 @@ SELECT continent, COUNT(name) FROM world WHERE population >= 10000000 GROUP BY c
 select continent from world group by continent having sum(population)>=100000000
 
 --6 JOIN
+SELECT matchid, player FROM goal   WHERE teamid = 'GER'
+SELECT id,stadium,team1,team2   FROM game where id = 1012
+SELECT player,teamid, stadium, mdate   FROM game JOIN goal ON (id=matchid) where teamid='GER'
+SELECT team1,team2, player   FROM game JOIN goal ON (id=matchid) where player LIKE 'Mario%'
+SELECT player, teamid, coach, gtime   FROM goal join eteam on teamid=id  WHERE gtime<=10
+select mdate, teamname from game JOIN eteam ON (team1=eteam.id) where coach = 'Fernando Santos'
+select player from game join goal on (id = matchid) where stadium = 'National Stadium, Warsaw'
+SELECT player   FROM game JOIN goal ON matchid = id      WHERE (teamid<>'GER' AND (team1='GER' OR team2='GER'))
+SELECT  teamname, count (*)   FROM eteam JOIN goal ON id=teamid  GROUP BY teamname  ORDER BY teamname
+select stadium, count(*) from game join goal on id = matchid Group BY stadium
+SELECT matchid, mdate, count(teamid)   FROM game JOIN goal ON matchid = id  WHERE (team1 = 'POL' OR team2 = 'POL') group by mdate, matchid order by matchid
+select matchid, mdate, count(*) from game join goal on matchid = id where (teamid = 'GER') group by mdate, matchid order by matchid
+SELECT mdate, team1, SUM(          case          when teamid=team1 then 1          ELSE 0          END ) AS score1, team2, SUM(          case          when teamid=team2 then 1          ELSE 0          END ) AS score2 FROM game gm LEFT JOIN goal g ON(gm.id=g.matchid) GROUP BY mdate,team1,team2 ORDER BY matchid
 
 --7 More JOIN operations
 
